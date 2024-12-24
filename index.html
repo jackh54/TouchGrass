@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Touch Grass</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .counter {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .grass {
+            width: 200px;
+            height: 200px;
+            background-image: url('symmetrical-grass.webp');
+            background-size: cover;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            animation: none;
+        }
+        .grass:active {
+            animation: grow 0.2s forwards;
+        }
+        @keyframes grow {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="counter">Grass touched: <span id="touchCount">0</span> times</div>
+    <div class="grass" onclick="touchGrass()">
+        Touch Grass
+    </div>
+    <script>
+        let count = localStorage.getItem('touchCount') ? parseInt(localStorage.getItem('touchCount')) : 0;
+        document.getElementById('touchCount').innerText = count;
+
+        function touchGrass() {
+            count++;
+            document.getElementById('touchCount').innerText = count;
+            localStorage.setItem('touchCount', count);
+        }
+    </script>
+</body>
+</html>
